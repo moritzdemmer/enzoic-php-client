@@ -1,0 +1,28 @@
+{
+  "name": "enzoic/enzoic",
+  "description": "PHP library for Enzoic API",
+  "require": {
+    "php": ">=5.5",
+    "ext-curl": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": ">=5.5"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Enzoic",
+      "email": "support@enzoic.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Enzoic\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "": "tests/"
+    }
+  }
+}
