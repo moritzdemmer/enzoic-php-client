@@ -10,9 +10,14 @@ This README covers the following topics:
 
 ## Installation
 
+To include the Enzoic library in your project using Composer: 
+
 ```sh
 $ composer require monolog/monolog
 ```
+
+
+**Enzoic for PHP requires the Argon2 command line utility to be installed and runnable by your PHP application.  See [https://github.com/P-H-C/phc-winner-argon2](https://github.com/P-H-C/phc-winner-argon2) for installation instructions.**
 
 ## API Overview
 
@@ -86,6 +91,8 @@ echo count($userExposures).' exposures found for eicar_1@enzoic.com';
 $exposureDetails = $enzoic->getExposureDetails($userExposures[0]);
 
 echo 'First exposure for test@enzoic.com was '.$exposureDetails->{'title'};
+
+?>
 ```
 
 More information in reference format can be found below.
