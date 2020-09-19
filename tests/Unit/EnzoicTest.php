@@ -3,15 +3,17 @@
 namespace Enzoic\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Enzoic;
+use Enzoic\Enzoic;
 
 class EnzoicTest extends TestCase
 {
-    protected function setUp() {
+    protected function setUp()
+    {
     }
 
-    public function testConstructor() {
-        $enzoic = new Enzoic\Enzoic(getenv('PP_API_KEY'), getenv('PP_API_SECRET'));
+    public function testConstructor()
+    {
+        $enzoic = new Enzoic(getenv('PP_API_KEY'), getenv('PP_API_SECRET'));
 
         $settings = $enzoic->getSettings();
         $this->assertEquals(getEnv('PP_API_KEY'), $settings['api_key']);
@@ -25,7 +27,8 @@ class EnzoicTest extends TestCase
         //echo(exec('echo -n "password" | argon2 "4zU7iIzt6Ej+PH[ol+ir7i\!Y*K-d90DB" -d -t 2 -k 1024 -p 2 -l 20 -e'));
     }
 
-    public function testCheckPassword() {
+    public function testCheckPassword()
+    {
         $enzoic = $this->getEnzoic();
 
         $response = $enzoic->checkPassword('kjdlkjdlksjdlskjdlskjslkjdslkdjslkdjslkd');
@@ -44,21 +47,23 @@ class EnzoicTest extends TestCase
         ]);
     }
 
-    public function testCheckCredentials() {
+    public function testCheckCredentials()
+    {
         $enzoic = $this->getEnzoic();
 
         for ($i = 1; $i <= 36; $i++) {
             if (in_array($i, [4, 9, 11, 12, 14])) continue;
 
-            echo "testing".$i."\n";
+            echo "testing" . $i . "\n";
 
-            $response = $enzoic->checkCredentials('eicar_'.$i.'@enzoic.com', '123456');
+            $response = $enzoic->checkCredentials('eicar_' . $i . '@enzoic.com', '123456');
 
             $this->assertEquals(true, $response);
         }
     }
 
-    public function testGetExposuresForUser() {
+    public function testGetExposuresForUser()
+    {
         $enzoic = $this->getEnzoic();
 
         $response = $enzoic->getExposuresForUser('@@bogus-username@@');
@@ -70,14 +75,15 @@ class EnzoicTest extends TestCase
         ], $response);
     }
 
-    public function testGetExposureDetails() {
+    public function testGetExposureDetails()
+    {
         $enzoic = $this->getEnzoic();
 
         $response = $enzoic->getExposureDetails('111111111111111111111111');
         $this->assertEquals(NULL, $response);
 
         $response = $enzoic->getExposureDetails('5820469ffdb8780510b329cc');
-        $this->assertEquals((object) [
+        $this->assertEquals((object)[
             'id' => '5820469ffdb8780510b329cc',
             'title' => 'last.fm',
             'entries' => 81967007,
@@ -85,10 +91,10 @@ class EnzoicTest extends TestCase
             'category' => 'Music',
             'passwordType' => 'MD5',
             'exposedData' => [
-                    'Emails',
-                    'Passwords',
-                    'Usernames',
-                    'Website Activity'
+                'Emails',
+                'Passwords',
+                'Usernames',
+                'Website Activity'
             ],
             'dateAdded' => '2016-11-07T09:17:19.000Z',
             'sourceURLs' => [],
@@ -96,7 +102,8 @@ class EnzoicTest extends TestCase
         ], $response);
     }
 
-    private function getEnzoic() {
-        return new Enzoic\Enzoic(getenv('PP_API_KEY'), getenv('PP_API_SECRET'));
+    private function getEnzoic()
+    {
+        return new Enzoic(getenv('PP_API_KEY'), getenv('PP_API_SECRET'));
     }
 }
