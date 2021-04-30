@@ -43,7 +43,7 @@ class EnzoicTest extends TestCase
         $response = $enzoic->checkPassword('123456');
         $this->assertEquals($response, [
             'revealedInExposure' => true,
-            'relativeExposureFrequency' => 22
+            'relativeExposureFrequency' => 28
         ]);
     }
 

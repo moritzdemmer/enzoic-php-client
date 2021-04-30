@@ -243,6 +243,7 @@ class Enzoic
      * @param $method
      * @param $body
      * @return array
+     * @throws \RuntimeException
      */
     private function make_rest_call($restPathAndQuery, $method, $body)
     {
@@ -283,7 +284,9 @@ class Enzoic
         $response = array();
         $response['body'] = curl_exec($ch);
         $response['status'] = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
+        if ($response['status'] === 401) {
+            throw new AuthenticationException();
+        }
         return $response;
     }
 
