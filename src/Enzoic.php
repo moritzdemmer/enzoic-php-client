@@ -284,16 +284,13 @@ class Enzoic
         $response = array();
         $response['body'] = curl_exec($ch);
         $response['status'] = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        if ($response['status'] === 401) {
-            throw new AuthenticationException();
-        }
         switch($response['status']) {
             case 0:
-                throw new ConnectionException(0);
+                throw new ConnectionException();
             case 401:
-                throw new AuthenticationException(401);
+                throw new AuthenticationException();
             case 500:
-                throw new UnexpectedException(500);
+                throw new UnexpectedException();
         }
         return $response;
     }
