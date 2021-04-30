@@ -287,6 +287,14 @@ class Enzoic
         if ($response['status'] === 401) {
             throw new AuthenticationException();
         }
+        switch($response['status']) {
+            case 0:
+                throw new ConnectionException(0);
+            case 401:
+                throw new AuthenticationException(401);
+            case 500:
+                throw new UnexpectedException(500);
+        }
         return $response;
     }
 
