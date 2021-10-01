@@ -1,5 +1,5 @@
 {
-  "name": "md/enzoic",
+  "name": "moritzdemmer/enzoic",
   "description": "PHP library for Enzoic API",
   "require": {
     "php": ">=5.5",
